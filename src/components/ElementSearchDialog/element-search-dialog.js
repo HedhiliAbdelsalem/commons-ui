@@ -62,8 +62,12 @@ const ElementSearchDialog = (props) => {
     const handleClose = useCallback(() => {
         setValue(null);
         setExpanded(false);
-        onClose();
     }, [onClose]);
+
+    //to reset value between the dialog closing and opening
+    useEffect(() => {
+        setValue((old) => !open ? null : old);
+    }, [open]);
 
     return (
         <Dialog
